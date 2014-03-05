@@ -5,7 +5,7 @@ import select
 
 class Game:
     'Game where snake eats snacks'
-    def __init__(self, height=64, width=64):
+    def __init__(self, height=24, width=24):
         self.score = 0
         self.speed = 1
         self.height = height
@@ -38,6 +38,17 @@ class Game:
             if time.time() - thisTime > self.speed*0.7:
                 self.snake.Move()
                 thisTime = time.time()
+                self.DrawField()
+    def DrawField(self):
+        board = []
+        for i in range(0,self.width):
+            board.append(["."] * self.height)
+
+        board[self.foodx][self.foody] = "F"
+        board[self.snake.x][self.snake.y] = "X"
+        print ''
+        for i in board:
+            print " ".join(i)
 
     def Main(self):
         'Main function'
@@ -70,10 +81,10 @@ class Snake:
     def ChangeDirection(self, key):
         'Changes direction the snake is moving'
         keys = {
-            '1':'left',
-            '2':'up',
-            '3':'right',
-            '4':'down'
+            'a':'left',
+            'w':'up',
+            'd':'right',
+            's':'down'
         }
         if key in keys:
             self.direction = keys[key]
