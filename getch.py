@@ -24,7 +24,7 @@ class _GetchUnix:
         old_settings = termios.tcgetattr(fd)
         try:
             tty.setraw(sys.stdin.fileno())
-            [i, o, e] = select([sys.stdin.fileno()], [], [], 0)
+            [i, o, e] = select([sys.stdin.fileno()], [], [], 0.001)
             if i: ch=sys.stdin.read(1)
             else: ch=''
         finally:
