@@ -68,7 +68,10 @@ class Game:
             self.CreateNewFoodItem()
         if self.snake.x == self.height-2 or self.snake.y == self.width-2 or self.snake.x == 0 or self.snake.y == 0:
             self.run = False
-
+        for k, i in enumerate(self.snake.positions):
+            if i[0] == self.snake.x and i[1] == self.snake.y and k != len(self.snake.positions)-1:
+                self.run = False
+        if self.run == False:
             os.system('clear')
             print ''
             print ' --- SCORE: %s --- ' % (self.score)
