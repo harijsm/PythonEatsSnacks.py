@@ -2,6 +2,7 @@ import random
 import time
 import sys
 import select
+import getch
 
 class Game:
     'Game where snake eats snacks'
@@ -28,13 +29,8 @@ class Game:
         'Loops while self.run = True.'
         thisTime = time.time()
         while self.run:
-            while sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
-                char = sys.stdin.readline().rstrip('\n')
-                if char:
-                    self.snake.ChangeDirection(char)
-                else:
-                    exit(0)
-
+            char = getch._Getch()
+            self.snake.ChangeDirection(char.impl())
             if time.time() - thisTime > self.speed*0.7:
                 self.snake.Move()
                 thisTime = time.time()
@@ -49,7 +45,6 @@ class Game:
         print ''
         for i in board:
             print " ".join(i)
-
     def Main(self):
         'Main function'
         self.snake = self.CreateNewSnake()
