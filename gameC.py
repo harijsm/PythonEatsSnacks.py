@@ -86,5 +86,3 @@ class Game:
         self.snake = self.CreateNewSnake()
         self.CreateNewFoodItem()
         self.Loop()
-
-game = Game()

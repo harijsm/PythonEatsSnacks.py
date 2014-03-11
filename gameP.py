@@ -14,7 +14,7 @@ BGCOLOR = P1
 
 class Game:
     'Game where snake eats snacks'
-    def __init__(self, height=240, width=240, cell=20):
+    def __init__(self, height=480, width=640, cell=20):
         self.score = 0
         self.speed = 0.3
         self.height = height
@@ -104,5 +104,3 @@ class Game:
                     self.DrawSnake()
                 thisTime = time.time()
             pygame.display.update()
-
-game = Game()
