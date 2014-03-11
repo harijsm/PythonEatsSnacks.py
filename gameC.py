@@ -8,25 +8,27 @@ import snake
 
 class Game:
     'Game where snake eats snacks'
-    def __init__(self, height=24, width=24):
+    def __init__(self, cell=1, height=24, width=24):
         self.score = 0
         self.speed = 0.5
         self.height = height
         self.width = width
         self.run = True
+        self.cell = cell
         self.startSpeed = self.speed
         self.Main()
     def CreateNewSnake(self):
         'Creates new Snake object'
-        randx = random.randint(1,self.height-2)
-        randy = random.randint(1,self.width-2)
-        return snake.Snake(randx, randy)
+        randx = random.randint(5,(self.width/self.cell)-5)
+        randy = random.randint(5,(self.height/self.cell)-5)
+        return snake.Snake(randx*self.cell, randy*self.cell)
     def CreateNewFoodItem(self):
         'Creates new food item'
-        self.foodx = random.randint(1,self.height-2)
-        self.foody = random.randint(1,self.width-2)
-        if self.foodx == self.snake.x and self.foody == self.snake.y:
-            self.CreateNewFoodItem()
+        self.foodx = (random.randint(5,(self.width/self.cell)-5))*self.cell
+        self.foody = (random.randint(5,(self.height/self.cell)-5))*self.cell
+        for i in self.snake.positions:
+            if self.foodx == i[0] and self.foody == i[1]:
+                self.CreateNewFoodItem()
     def Loop(self):
         'Loops while self.run = True.'
         thisTime = time.time()
