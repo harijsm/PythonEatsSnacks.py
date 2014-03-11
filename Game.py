@@ -4,6 +4,7 @@ import sys
 import select
 import getch
 import os
+import snake
 
 class Game:
     'Game where snake eats snacks'
@@ -19,7 +20,7 @@ class Game:
         'Creates new Snake object'
         randx = random.randint(1,self.height-2)
         randy = random.randint(1,self.width-2)
-        return Snake(randx, randy)
+        return snake.Snake(randx, randy)
     def CreateNewFoodItem(self):
         'Creates new food item'
         self.foodx = random.randint(1,self.height-2)
@@ -85,38 +86,5 @@ class Game:
         self.snake = self.CreateNewSnake()
         self.CreateNewFoodItem()
         self.Loop()
-    
-class Snake:
-    'Very hungry snake'
-    def __init__(self, x=0, y=0, size=1, direction='up'):
-        self.x = x
-        self.y = y
-        self.size = size+1
-        self.direction = direction
-        self.positions = []
-    def Move(self):
-        'Changes snakes x, y according to its direction'
-        if self.direction == 'up':
-            self.x = self.x-1
-        elif self.direction == 'down':
-            self.x = self.x+1
-        elif self.direction == 'left':
-            self.y = self.y-1
-        elif self.direction == 'right':
-            self.y = self.y+1
-
-        self.positions.append([self.x, self.y])
-        del self.positions[len(self.positions)-self.size:len(self.positions)-self.size+1]
-
-    def ChangeDirection(self, key):
-        'Changes direction the snake is moving'
-        keys = {
-            'a':'left',
-            'w':'up',
-            'd':'right',
-            's':'down'
-        }
-        if key in keys:
-            self.direction = keys[key]
 
 game = Game()
