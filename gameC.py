@@ -1,3 +1,4 @@
+from __future__ import print_function
 import random
 import time
 import sys
@@ -58,11 +59,11 @@ class Game:
         for i in self.snake.positions:
             board[i[0]][i[1]] = "X"
         for i in board:
-            print " ".join(i)
-        print ''
+            print(" ".join(i))
+        print('')
         currSpeed = (self.startSpeed/self.speed)*100
-        print ' SCORE: %s ' % (self.score)
-        print ' SPEED: ' + str(int(currSpeed)) + '%'
+        print(' SCORE: %s ' % (self.score))
+        print(' SPEED: ' + str(int(currSpeed)) + '%')
     def Collision(self):
         if self.snake.x == self.foodx and self.snake.y == self.foody:
             self.score += 1
@@ -76,13 +77,12 @@ class Game:
                 self.run = False
         if self.run == False:
             os.system('clear')
-            print ''
-            print ' --- SCORE: %s --- ' % (self.score)
-            print ' === GAME OVER === '
-            print ''
-            print ''
+            print('')
+            print(' --- SCORE: %s --- ' % (self.score))
+            print(' === GAME OVER === ')
+            print('')
+            print('')
             os._exit(1)
-
     def Main(self):
         'Main function'
         self.snake = self.CreateNewSnake()

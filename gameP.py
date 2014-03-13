@@ -1,3 +1,4 @@
+from __future__ import print_function
 import random
 import time
 import sys
@@ -54,11 +55,9 @@ class Game:
             pygame.draw.rect(self.display, P3, snakeSegmentRect)
             snakeInnerSegmentRect = pygame.Rect(x + 4, y + 4, self.cell - 8, self.cell - 8)
             pygame.draw.rect(self.display, P3, snakeInnerSegmentRect)
-
     def drawFoodItem(self):
         foodItem = pygame.Rect(self.foodx, self.foody, self.cell, self.cell)
         pygame.draw.rect(self.display, P2, foodItem)
-
     def Collision(self):
         if self.snake.x == self.foodx and self.snake.y == self.foody:
             self.score += 1
@@ -72,13 +71,12 @@ class Game:
                 self.run = False
         if self.run == False:
             os.system('clear')
-            print ''
-            print ' --- SCORE: %s --- ' % (self.score)
-            print ' === GAME OVER === '
-            print ''
-            print ''
+            print('')
+            print(' --- SCORE: %s --- ' % (self.score))
+            print(' === GAME OVER === ')
+            print('')
+            print('')
             os._exit(1)
-
     def Main(self):
         'Main function'
         self.snake = self.CreateNewSnake()
@@ -90,7 +88,7 @@ class Game:
         while self.run:
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    terminate()
+                    os._exit(1)
                 elif event.type == KEYDOWN:
                     self.snake.ChangeDirection(event.key)
 
